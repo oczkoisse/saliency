@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Cleaning"
+
+./clean
+
+echo "Wrapping"
+
+swig -I$HOME/Projects/opencv-swig/lib $(pkg-config --cflags opencv) -python -c++ bmsl.i
+
+echo "Compiling and Linking"
+
+g++ -std=c++11 -Wall -Werror -shared -fpic -o _bmsl.so BMS.cpp bmsl_wrap.cxx $(pkg-config --cflags --libs python3) $(pkg-config --cflags --libs opencv)
+
+echo "Running"
+
+python3 -c "import bmsl"

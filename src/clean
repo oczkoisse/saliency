@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rm *.o
+rm *_wrap.cxx
+mv bms.py bms.py.safe
+rm *.py
+mv bms.py.safe bms.py
+rm *.pyc
+rm *.so
